@@ -18,7 +18,7 @@
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
 
-    <!-- 此文件被 webx.xml 和 webx-*.xml 同时引用。 -->
+    <!-- 此文件被 webx.xml 和 webx-*.xml 同时引用。定义了页面渲染的相关功能以及对URL后缀的映射 -->
     <!-- 注意：此文件需要property-placeholder变量：${component}。 -->
 
     <!-- Template渲染服务。 -->

@@ -44,7 +44,7 @@ public class JettyFactory {
         }
         WebAppContext webContext = new WebAppContext(ctxPath.getPath(), contextPath);
         // 修改webdefault.xml，解决Windows下Jetty Lock住静态文件的问题.
-        webContext.setDefaultsDescriptor(WINDOWS_WEBDEFAULT_PATH);
+//        webContext.setDefaultsDescriptor(WINDOWS_WEBDEFAULT_PATH);
         server.setHandler(webContext);
 
         return server;

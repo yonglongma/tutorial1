@@ -11,16 +11,30 @@
                  http://www.alibaba.com/schema/services/uris/interceptors http://localhost:8080/schema/services-uris-interceptors.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
-
+    <!--定义了发生内部或外部重定向时URI的构造-->
     <services:uris>
         <uris:uri id="server" requestAware="true" />
+        <uris:servlet-uri id="systemServer" requestAware="true">
+            <!--    <serverScheme>https</serverScheme>
+                <serverPort>443</serverPort>-->
+            <servletPath>/</servletPath>
+        </uris:servlet-uri>
 
-        <uris:turbine-uri id="app1Link" exposed="true" extends="server">
+        <uris:turbine-uri id="backendLink" exposed="true" extends="systemServer">
             <componentPath>/</componentPath>
         </uris:turbine-uri>
 
-        <uris:turbine-content-uri id="app1Content" exposed="true" extends="app1Link" />
+        <uris:turbine-content-uri id="backendContent" exposed="true" extends="systemServer">
+            <componentPath>/backend/</componentPath>
+        </uris:turbine-content-uri>
 
+        <uris:turbine-uri id="homeLink" exposed="true" extends="systemServer">
+            <componentPath>/</componentPath>
+        </uris:turbine-uri>
+
+        <uris:turbine-content-uri id="homeContent" exposed="true" extends="systemServer">
+            <componentPath>/home/</componentPath>
+        </uris:turbine-content-uri>
     </services:uris>
 
 </beans:beans>

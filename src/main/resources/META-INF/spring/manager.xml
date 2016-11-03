@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byType">
+
+    <!--声明自动为spring容器中那些配置@aspectJ切面的bean创建代理，织入切面-->
+    <aop:aspectj-autoproxy/>
+
+
+    <context:component-scan base-package="com.alibaba.tutorial1.modules.*.biz">
+        <context:include-filter type="regex" expression=".*Impl"/>
+    </context:component-scan>
+    <context:component-scan base-package="com.alibaba.tutorial1.modules.*.svc">
+        <context:include-filter type="regex" expression=".*Impl"/>
+    </context:component-scan>
+
+
+    <!-- 通过@Service注解，可以让Spring进行依赖管理，让Spring知道这是一个Service Bean.
+       @Autowire注解，可以让自动Set 对象，这个也是通过Spring来进行依赖管理的，当然也还需要
+        在Spring配置文件里面进行配置相关的信息，以让Spring可以知道哪些包需要进行注解扫描，以加入依赖管理-->
+
+    <!--Scan就是Spring的一种简便的依赖管理，这种之所以简便是你不需要为每一个Bean,Service,Mapper定义一个依赖管理，
+    而只需要在需要加入依赖的类上加入@Service,@Controller等注解就可以加入依赖
+    当然最重要的是@AutoWired,当系统扫描到这个注解时，就会在系统中去找相关联的类或方法进行注入
+    annotation scan:
+    <context:component-scan base-package="com.DreamForce.Demo.persist.IbatisImpl,com.DreamForce.demo.integrate" />
+     spring扫描到有@Component @Controller@Service等这些注解的类，则把这些类注册为bean,
+   上文定义了扫描的路径，这里定义了两个路径以供Spring进行扫描，当然还可以加上一些过滤条件让扫描更精确，效率更高,
+    包含了<context:annotation-config/> (注解提供元数据，AutowiredAnnotationBeanPostProcessor ，CommonAnnotationBeanPostProcessor
+     就是处理这些注释元数据的处理器，<context:annotation-config/>注册BeanPostProcessor)
+
+
+    mapper scan:
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.DreamForce.Demo.persist.DAO" />
+    </bean>
+    这里定义了Mybatis 的Mapper文件路径，所有的Mapper文件在这里去寻找。 -->
+</beans>

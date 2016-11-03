@@ -1,0 +1,30 @@
+$page.setTitle("It works.")
+
+<h1>It works.</h1>
+<div>
+    <div>
+        <label>姓名</label>
+        <input type="text" id="name">
+    </div>
+    <div>
+        <label>手机号</label>
+        <input type="text" id="mobilePhone">
+    </div>
+    <div>
+        <label>密码</label>
+        <input type="password" id="passport">
+    </div>
+    <button id="register">注册</button>
+</div>
+<script>
+    $("#register").click(function(){
+        var param = {
+            name:$("#name").val(),
+            mobilePhone:$("#mobilePhone").val(),
+            password:$("#password").val()
+        }
+        $.post("",param,function(data){
+
+        })
+    })
+</script>

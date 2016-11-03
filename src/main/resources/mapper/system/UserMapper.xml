@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alibaba.tutorial1.modules.system.dal.UserMapper">
+
+    <sql id="whereForFindList">
+        <if test="request.nick!=null"> AND `NAME` LIKE CONCAT ('%',#{ request.name },'%')</if>
+        <if test="request.mobile!=null"> AND `MOBILE` LIKE CONCAT ('%',#{ request.mobile },'%')</if>
+        <if test="request.mail!=null"> AND `MAIL` LIKE CONCAT ('%',#{ request.mail },'%')</if>
+    </sql>
+
+    <sql id="whereForSearchList">
+
+    </sql>
+
+    <select id="find" resultMap="userPO">
+        SELECT * FROM
+        (
+        SELECT
+        <include refid="entityColumnList"/>
+        FROM
+        `SYS_USER`
+        WHERE
+        `IS_DELETED`=0
+        <include refid="whereForFindList" />
+        ) AS T
+
+        <if test="request.pageSize !=0">
+            LIMIT #{ request.beginItemIndex }, #{ request.pageSize }
+        </if>
+    </select>
+
+    <select id="findCount"   resultType="java.lang.Long">
+        SELECT
+        COUNT(*)
+        FROM
+        `SYS_USER`
+        WHERE
+        `IS_DELETED`=0
+        <include refid="whereForFindList" />
+    </select>
+
+    <select id="search" resultMap="userPO">
+        SELECT * FROM
+        (
+        SELECT
+        <include refid="entityColumnList"/>
+        FROM
+        `SYS_USER`
+        WHERE
+        `IS_DELETED`=0
+        <if test="request.keyword !=null">
+            AND <include refid="whereForSearchList" />
+        </if>
+
+        ) AS T
+        <if test="request.pageSize !=0">
+            LIMIT #{ request.beginItemIndex }, #{ request.pageSize }
+        </if>
+    </select>
+
+    <select id="searchCount"   resultType="java.lang.Long">
+        SELECT
+        COUNT(*)
+        FROM
+        `SYS_USER`
+        WHERE
+        `IS_DELETED`=0
+        AND <include refid="whereForSearchList" />
+    </select>
+
+    <select id="existByCode" resultType="java.lang.Long">
+        SELECT
+        COUNT(*)
+        FROM
+        `SYS_USER`
+        WHERE
+        `IS_DELETED`=0
+        AND  `ID` != #{id}
+        AND `CODE` = #{code}
+    </select>
+
+
+    <update id="update">
+        UPDATE
+        `SYS_USER`
+        SET
+        `NAME`=#{ request.name },
+        `MOBILE`=#{ request.mobile },
+        `MOBILE_BIND`=#{ request.mobileBind },
+        `MAIL`=#{ request.mail },
+        `MAIL_BIND`=#{ request.mailBind },
+        `IDENTITY_TYPE`=#{ request.identityType },
+        `AVATAR`=#{ request.avatar },
+        `SIGN`=#{ request.sign },
+        `WECHAT_ID`=#{ request.wechatId },
+        `ALIPAY_ID`=#{ request.alipayId },
+        `WEIBO_ID`=#{ request.weiboId },
+        `LAST_UPDATED_BY`=#{ passport.userId }
+        ,`LAST_UPDATE_TIME`=SYSDATE()
+        ,`ROW_VERSION`=#{ request.rowVersion }+1
+        WHERE
+        `IS_DELETED`=0
+        AND `ID` = #{ request.id }
+        AND `ROW_VERSION` = #{ request.rowVersion }
+    </update>
+
+
+</mapper>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alibaba.tutorial1.modules.system.dal.UserMapper">
+
+    <resultMap  id="userPO" type="com.alibaba.tutorial1.modules.system.po.UserPO">
+        <id column="ID" jdbcType="NUMERIC" property="id" />
+        <result column="NAME"  jdbcType="VARCHAR" property="name"/>
+        <result column="MOBILE"  jdbcType="VARCHAR" property="mobile"/>
+        <result column="MOBILE_BIND"  jdbcType="TINYINT" property="mobileBind"/>
+        <result column="MAIL"  jdbcType="VARCHAR" property="mail"/>
+        <result column="MAIL_BIND"  jdbcType="TINYINT" property="mailBind"/>
+        <result column="IDENTITY_TYPE"  jdbcType="VARCHAR" property="identityType"/>
+        <result column="AVATAR"  jdbcType="VARCHAR" property="avatar"/>
+        <result column="SIGN"  jdbcType="VARCHAR" property="sign"/>
+        <result column="WECHAT_ID"  jdbcType="VARCHAR" property="wechatId"/>
+        <result column="ALIPAY_ID"  jdbcType="VARCHAR" property="alipayId"/>
+        <result column="WEIBO_ID"  jdbcType="VARCHAR" property="weiboId"/>
+        <result column="ROW_VERSION"  jdbcType="NUMERIC" property="rowVersion"/>
+        <result column="IS_DELETED"  jdbcType="TINYINT" property="isDeleted"/>
+        <result column="CREATED_BY"  jdbcType="NUMERIC" property="createdBy"/>
+        <result column="CREATION_TIME"  jdbcType="TIMESTAMP" property="creationTime"/>
+        <result column="LAST_UPDATED_BY"  jdbcType="NUMERIC" property="lastUpdatedBy"/>
+        <result column="LAST_UPDATE_TIME"  jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+    </resultMap>
+
+    <sql id="entityColumnList">
+    `ID`,`NAME`,`MOBILE`, `MOBILE_BIND`,`MAIL`, `MAIL_BIND`,`IDENTITY_TYPE`,`AVATAR`,`SIGN`,`WECHAT_ID`,`ALIPAY_ID`,
+    `WEIBO_ID`,`ROW_VERSION`,`IS_DELETED`,`CREATED_BY`,`CREATION_TIME`,`LAST_UPDATED_BY`,`LAST_UPDATE_TIME`
+    </sql>
+
+    <insert id="insert">
+        INSERT INTO
+            `SYS_USER`
+            (
+            <include refid="entityColumnList" />
+            )
+        VALUES
+        (
+        #{ user.id },
+        #{ user.name },
+        #{ user.mobile },
+        #{ user.mobileBind },
+        #{ user.mail },
+        #{ user.mailBind },
+        #{ user.identityType },
+        #{ user.avatar },
+        #{ user.sign },
+        #{ user.wechatId },
+        #{ user.alipayId },
+        #{ user.weiboId },
+        0,0,#{ passport.userId },sysdate(),null,null
+        )
+    </insert>
+
+    <insert id="insertBatch">
+        INSERT INTO
+            `SYS_USER`
+            (
+            <include refid="entityColumnList" />
+            )
+        VALUES
+        <foreach collection="list" item= "user" index ="index" separator=",">
+            (
+            #{ user.id },
+            #{ user.name },
+            #{ user.mobile },
+            #{ user.mobileBind },
+            #{ user.mail },
+            #{ user.mailBind },
+            #{ user.identityType },
+            #{ user.avatar },
+            #{ user.sign },
+            #{ user.wechatId },
+            #{ user.alipayId },
+            #{ user.weiboId },
+            0,0,#{ passport.userId },sysdate(),null,null
+            )
+        </foreach >
+    </insert>
+
+
+    <update id="delete">
+        UPDATE
+            `SYS_USER`
+        SET
+            `IS_DELETED` = 1
+            ,`LAST_UPDATED_BY`=#{ passport.userId }
+            ,`LAST_UPDATE_TIME`=SYSDATE()
+        WHERE
+            `IS_DELETED`=0
+            AND `ID` = #{id}
+    </update>
+
+    <update id= "deleteBatch">
+        UPDATE
+            `SYS_USER`
+        SET
+            `IS_DELETED` = 1
+            ,`LAST_UPDATED_BY`=#{ passport.userId }
+            ,`LAST_UPDATE_TIME`=SYSDATE()
+        WHERE
+            `IS_DELETED`=0
+            AND `ID` in
+        <foreach collection="list" item= "id" index ="index" open= "(" close =")" separator=",">
+            #{id}
+        </foreach >
+    </update >
+
+
+    <select id="getById" resultMap="userPO">
+        SELECT
+        <include refid="entityColumnList" />
+        FROM
+            `SYS_USER`
+        WHERE
+            `IS_DELETED` = 0
+            AND `ID` = #{id}
+    </select>
+
+    <select id="getListByIds" resultMap="userPO">
+        SELECT
+            <include refid="entityColumnList" />
+        FROM
+            `SYS_USER`
+        WHERE
+        `IS_DELETED` = 0
+        AND `ID` in
+        <foreach collection="list" item= "id" index ="index" open= "(" close =")" separator=",">
+            #{id}
+        </foreach >
+        
+    </select>
+
+    <select id="getAllList" resultMap="userPO">
+        SELECT
+        <include refid="entityColumnList" />
+        FROM
+            `SYS_USER`
+        WHERE
+            `IS_DELETED`=0
+    </select>
+
+    <select id="existById"  resultType="java.lang.Long">
+        SELECT
+            COUNT(*)
+        FROM
+            `SYS_USER`
+        WHERE
+            `IS_DELETED`=0
+            AND `ID`=#{id}
+    </select>
+</mapper>

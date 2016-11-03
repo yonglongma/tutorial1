@@ -1,0 +1,366 @@
+/*公用*/
+html, body {
+    font: 14px/1.5 "PingFang SC", Helvetica, "Helvetica Neue", "微软雅黑", Tahoma, Arial, sans-serif;
+    color: #14191e;
+}
+body {
+    background: #fff;
+    color: #5e5e5e;
+    font: 14px/2em Microsoft YaHei,SimSun,Arial;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: 400;
+    font-family: "Microsoft YaHei";
+}
+ul{
+    margin: 0;
+    padding: 0;
+}
+ul li{
+    list-style: none;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+li{
+    margin: 0;
+    padding: 0;
+}
+div {
+    background-size: cover;
+}
+form label.error {
+    color: red;
+    margin-left: 10px;
+}
+form input.error, form select.error, form textarea.error {
+    border: 1px dotted red!important;
+}
+a, input, button {
+    outline: none;
+}
+input, button, textarea, select {
+    border: 0;
+}
+button {
+    -webkit-appearance: button;
+}
+input, textarea, keygen, select, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb;
+}
+input, textarea, keygen, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em 0em 0em 0em;
+    font: 13.3333px Arial;
+}
+i, cite, em, var, address, dfn {
+    font-style: italic;
+}
+.clearfix:after {
+    content: '\0020';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.visible-xs-block {
+    display: none;
+}
+
+#header {
+    padding-top: 10px;
+    height: 70px;
+}
+.newcontainer, .page-container {
+    margin: 0 auto;
+    width: 1200px;
+}
+#nav {
+    width: auto;
+    padding-right: 10px;
+    height: 60px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1000;
+}
+#logo {
+    margin: 0 20px;
+}
+.logo {
+    float: left;
+}
+#logo a, .logo a {
+    display: block;
+    height: 60px;
+    width: 140px;
+    background: url("images/logo.jpg") no-repeat center center;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background-size: 100%;
+}
+.hide-text {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.nav-item li {
+    float: left;
+}
+.nav-item a {
+    position: relative;
+    padding: 0 20px;
+    display: block;
+    color: #07111b;
+    text-align: center;
+    font-size: 16px;
+    height: 60px;
+    line-height: 60px;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+#nav-item-index {
+    display: none;
+}
+#login-area {
+    float: right;
+    position: relative;
+}
+.header-unlogin li {
+    float: left;
+}
+.header-app {
+    position: relative;
+}
+.header-app a {
+    font-size: 22px;
+}
+.header-signin a, .header-signup a, .header-app a {
+    display: block;
+    width: 60px;
+    font-size: 14px;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    color: #787d82;
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+.header-app .icon-appdownload {
+    font-weight: normal;
+    position: relative;
+    top: 2px;
+    color: #787d82;
+}
+.icon-appdownload:before {
+    content: "\e908";
+}
+.header-app .QR-download {
+    display: none;
+    position: absolute;
+    top: 72px;
+    left: -57px;
+    width: 140px;
+    height: 166px;
+    background: #fff;
+    padding: 16px 20px 18px 20px;
+    text-align: center;
+    webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+#login-area {
+    float: right;
+    position: relative;
+}
+.search-warp {
+    float: right;
+    position: relative;
+    margin-right: 18px;
+}
+.search-area {
+    border: 0px solid #fff;
+    border-bottom: 1px solid #d9dde1;
+    float: right;
+    position: relative;
+    height: 38px;
+    width: 210px;
+    margin: 10px 0;
+    padding-right: 30px;
+    zoom: 1;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    transition: width 0.3s;
+}
+.search-area .search-input {
+    color: #71777d;
+    background-color: transparent !important;
+    padding: 5px 10px;
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    font-size: 12px;
+    float: left;
+    border: 0;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.search-area .btn_search {
+    float: left;
+    cursor: pointer;
+    width: 30px;
+    height: 38px;
+    text-align: center;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+}
+.search-area .search-area-result {
+    position: absolute;
+    left: 0px;
+    top: 41px;
+    width: 238px;
+    margin-bottom: 20px;
+    border: 1px solid #d3d3d3;
+    border-top: none;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+    font-size: 12px;
+    overflow: hidden;
+    display: none;
+    z-index: 1000;
+}
+.search-warp .showhide-search {
+    width: 30px;
+    height: 60px;
+    line-height: 60px;
+    text-align: right;
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 0;
+}
+.search-warp i {
+    display: block;
+    width: 30px;
+    height: 60px;
+    color: #757a7e;
+    font-size: 22px;
+    line-height: 60px;
+    cursor: pointer;
+}
+.l {
+    float: left;
+}
+.r {
+    float: right;
+}
+form {
+    display: block;
+    margin-top: 0em;
+}
+.color-red {
+    color: #EF1300!important;
+}
+p {
+    word-break: break-all;
+}
+.pr {
+    position: relative;
+}
+.ipt {
+    color: #14191e;
+    background-color: #ffffff;
+    border: 1px solid #98a1a6;
+    height: 20px;
+    padding: 9px 9px;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 0;
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -moz-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    border-color: #98a1a6;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.rlf-tip-wrap {
+    clear: both;
+}
+.rlf-tip-wrap {
+    font-size: 12px;
+    height: 20px;
+}
+
+.color-red {
+    color: #f01414;
+}
+.errorHint {
+    height: 25px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #f01414;
+}
+.color-red {
+    color: #EF1300!important;
+}
+p {
+    word-break: break-all;
+}
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+a:active{text-decoration:none;}
+.btn-red {
+    color: #ffffff;
+    background-color: #ec1500;
+    border-color: #ec1500;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    -weibkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    width: 138px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 14px;
+}
+.clearfix:after {
+    content: '\0020';
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}

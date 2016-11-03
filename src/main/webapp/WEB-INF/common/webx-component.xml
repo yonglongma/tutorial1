@@ -10,7 +10,7 @@
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
 
-    <!-- 此文件仅被 webx-*.xml 引用。 -->
+    <!-- 此文件仅被 webx-*.xml 引用。将框架提供的服务提供给了应用 -->
     <!-- 注意：此文件需要property-placeholder变量：${component}。 -->
 
     <!-- 综合设置。 -->

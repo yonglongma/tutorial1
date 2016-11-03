@@ -19,8 +19,60 @@
         <project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>
         <productionMode>false</productionMode>
         <autoconfig-plugin-version>1.2</autoconfig-plugin-version>
+        <mybatis.version>3.2.5</mybatis.version>
+        <mybatis-spring.version>1.2.2</mybatis-spring.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.1.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.xiniunet</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.dozer</groupId>
+            <artifactId>dozer</artifactId>
+            <version>5.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.9</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba.citrus</groupId>
             <artifactId>citrus-webx-all</artifactId>
@@ -59,6 +111,14 @@
             <artifactId>jsp-2.1-glassfish</artifactId>
             <version>2.1.v20100127</version>
         </dependency>
+        <!-- URL重写工具引用 -->
+        <!-- ================================================= -->
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>4.0.3</version>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -77,14 +137,6 @@
                     <exclusion>
                         <artifactId>servlet-api</artifactId>
                         <groupId>org.mortbay.jetty</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.xiniunet</groupId>
-                        <artifactId>framework</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>com.xiniunet</groupId>
-                        <artifactId>fastjson</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -134,6 +186,13 @@
                 <artifactId>spring-aop</artifactId>
                 <version>${spring-version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring-version}</version>
+            </dependency>
+
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
@@ -293,6 +352,9 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
+                    <webAppConfig> 
+                    <defaultsDescriptor>src/main/resources/webdefault-windows.xml.xml</defaultsDescriptor> 
+                </webAppConfig>
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>
@@ -319,10 +381,6 @@
                         </systemProperty>
                     </systemProperties>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.alibaba.citrus.tool</groupId>
-                <artifactId>springext-maven-plugin</artifactId>
             </plugin>
         </plugins>
         <resources>

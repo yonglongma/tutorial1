@@ -11,7 +11,11 @@
                  http://www.alibaba.com/schema/services/pipeline/valves http://localhost:8080/schema/services-pipeline-valves.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
-
+    <!--起到阀门作用的数据流管道，这里决定了请求的方向
+    1.分析URL：：用户访问的主页target；2.进入choose，进行多重分支选择；
+    3.performAction执行action；4.performTemplateScreen查找并执行screen
+    5.渲染模板，首先映射成screen template，以及映射成layout template；
+    6.Layout模板如果找不到，就直接渲染screen模板；如果存在，则把渲染screen模板后的结果嵌入到layout模板中-->
     <services:pipeline>
 
         <!-- 初始化turbine rundata，并在pipelineContext中设置可能会用到的对象(如rundata、utils)，以便valve取得。 -->
@@ -21,7 +25,7 @@
         <pl-valves:setLoggingContext />
 
         <!-- 分析URL，取得target。 -->
-        <pl-valves:analyzeURL />
+        <pl-valves:analyzeURL homepage="index"/>
 
         <!-- 检查csrf token，防止csrf攻击和重复提交。假如request和session中的token不匹配，则出错，或显示expired页面。 -->
         <pl-valves:checkCsrfToken />

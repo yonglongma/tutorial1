@@ -10,8 +10,8 @@
                  http://www.alibaba.com/schema/services/resource-loading/filters http://localhost:8080/schema/services-resource-loading-filters.xsd
                  http://www.alibaba.com/schema/services/resource-loading/loaders http://localhost:8080/schema/services-resource-loading-loaders.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
-             ">
-
+                 ">
+    <!--定义了各种资源及其响应的loader-->
     <services:resource-loading>
 
         <resource-alias pattern="/" name="/webroot" />

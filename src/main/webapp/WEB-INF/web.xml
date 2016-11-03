@@ -10,16 +10,77 @@
         <listener-class>com.alibaba.citrus.logconfig.LogConfiguratorListener</listener-class>
     </listener>
 
-    <!-- 装载/WEB-INF/webx.xml, /WEB-INF/webx-*.xml -->
+    <!-- 监听器实现了ServletContextListener接口，初始化webx,装载/WEB-INF/webx.xml, /WEB-INF/webx-*.xml，并创建级联的Spring容器-->
     <listener>
         <listener-class>com.alibaba.citrus.webx.context.WebxContextLoaderListener</listener-class>
     </listener>
+
+    <!--UrlRewriteFilter是一个用于改写URL的Web过滤器,典型应用就把动态URL静态化，便于搜索引擎爬虫抓取你的动态网页
+        1:为了对搜索的友好,因为有些搜索不能抓取动态页面或是对动态抓取的页面没有静态页面高.
+       2:屏蔽内部的url结构.
+       3:美化url.-->
+    <filter>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <!-- 官网权限控制器 -->
+    <filter>
+        <filter-name>home</filter-name>
+        <filter-class>com.alibaba.tutorial1.web.home.filter.Home</filter-class>
+        <init-param>
+            <param-name>excludedPages</param-name>
+            <param-value>/backend/*</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>home</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <!-- 后台管理权限控制器 -->
+    <filter>
+        <filter-name>backend</filter-name>
+        <filter-class>com.alibaba.tutorial1.web.backend.filter.Backend</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>backend</filter-name>
+        <url-pattern>/backend/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <!-- API处理器 -->
+    <filter>
+        <filter-name>api</filter-name>
+        <filter-class>com.alibaba.tutorial1.web.home.filter.Api</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>api</filter-name>
+        <url-pattern>*.api</url-pattern>
+    </filter-mapping>
+
 
     <filter>
         <filter-name>mdc</filter-name>
         <filter-class>com.alibaba.citrus.webx.servlet.SetLoggingContextFilter</filter-class>
     </filter>
+    <filter-mapping>
+        <filter-name>mdc</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
+    <!--当有请求时，WebxFrameworkFilter接收请求，然后WebxRootController创建和处理request context，路由到子应用，并提供处理异常、开发模式功能，
+    WebxController进行apps' pipeline-->
     <filter>
         <filter-name>webx</filter-name>
         <filter-class>com.alibaba.citrus.webx.servlet.WebxFrameworkFilter</filter-class>
@@ -33,12 +94,6 @@
                 对于passthru请求，webx的request-contexts服务、错误处理、开发模式等服务仍然可用。 --></param-value>
         </init-param>
     </filter>
-
-    <filter-mapping>
-        <filter-name>mdc</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
     <filter-mapping>
         <filter-name>webx</filter-name>
         <url-pattern>/*</url-pattern>

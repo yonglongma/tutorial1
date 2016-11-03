@@ -13,12 +13,14 @@
                  http://www.alibaba.com/schema/services/request-contexts http://localhost:8080/schema/services-request-contexts.xsd
                  http://www.springframework.org/schema/beans http://localhost:8080/schema/www.springframework.org/schema/beans/spring-beans.xsd
              ">
-
+    <!--当请求到达一个web应用内部的时候，首先请求的后缀会根据webx-component-and-root.xml中的配置做一次映射。之后请求就进入管道，其具体的流向就交由pipeline.xml决定了。
+    pipeline中定义的操作首先是初始化tuibine，然后依次为日志上下文、URL分析获取target（比较抽象的一个概念）、csrfToken的检查和权限检查；最后就是按照target来分发流向了。-->
     <!-- 支持${xxx}替换。 -->
     <services:property-placeholder>
-        <property key="component">common</property>
+        <property key="component">home</property>
     </services:property-placeholder>
 
+    <beans:import resource="classpath*:META-INF/spring/*"/>
     <!-- 共享配置。 -->
     <beans:import resource="common/webx-component-and-root.xml" />
 
@@ -35,7 +37,7 @@
     <services:webx-configuration>
         <!-- 默认将productionMode设为true，建议在jetty插件中设置-DproductionMode=false。 -->
         <productionMode>${productionMode:true}</productionMode>
-        <components defaultComponent="app1" />
+        <components defaultComponent="home" />
     </services:webx-configuration>
 
     <!-- 设置request/response/session。 -->
@@ -61,7 +63,7 @@
     <!-- 装载模块。 -->
     <services:module-loader>
         <ml-factories:class-modules>
-            <search-packages type="$1" packages="com.alibaba.webx.tutorial1.common.module.*" />
+            <search-packages type="$1" packages="com.alibaba.tutorial1.web.home.module.*" />
         </ml-factories:class-modules>
     </services:module-loader>
 

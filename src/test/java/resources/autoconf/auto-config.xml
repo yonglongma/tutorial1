@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <group>
+        <property name="deploy.mode" defaultValue="development" description="部署环境模式"/>
+        <property name="uc.api" defaultValue="http://bbs-dev.91anu.com/forum/uc_server" description="UCenter的访问路径"/>
+        <property name="uc.ip" defaultValue="192.168.3.2" description="UCenter的IP地址"/>
+        <property name="uc.key" defaultValue="123456" description="与UCenter通信的密钥，这里自己设定，需与discuz ucenter一致"/>
+        <property name="uc.appid" defaultValue="2" description="应用ID,默认为2"/>
+        <property name="uc.connect" defaultValue="uc_api_post" description="默认uc_api_post"/>
+
+        <property name="db.host" defaultValue="192.168.3.112" description="数据库服务器IP地址"/>
+        <property name="db.port" defaultValue="3306" description="数据库服务器端口号"/>
+        <property name="db.username" defaultValue="system" description="数据库用户名"/>
+        <property name="db.password" defaultValue="eDvQTQrkwEBxq8v8g7KLTMWY4cqZukPWKpMrCLvwFCkTBDEIvCyvVpPa/rlkKvC1EP6XL/rRaIY3kQZD2dC/vA==" description="数据库密码"/>
+
+        <property name="sms.api.uid" defaultValue="xiniunet" description="短信接口用户名" />
+        <property name="sms.api.pwd" defaultValue="xiniunet_2105" description="短信接口密码" />
+
+        <property name="site.domain" defaultValue="91anu.com" description="网站主域名" />
+        <property name="site.bbs.url" defaultValue="http://bbs-dev.91anu.com/forum/forum.php" description="论坛URL" />
+
+        <property name="tencent.pic.app.id" defaultValue="10007337" description="图片项目ID" />
+        <property name="tencent.pic.secret.id" defaultValue="AKIDfIpwMVimu2uOzaw7XhX5h6xAJP1rmup5" description="图片密钥ID" />
+        <property name="tencent.pic.secret.key" defaultValue="VjIMxgpvRJ5GmjpyXZJhSXkiRSxJ8R5S" description="图片密钥Key" />
+        <property name="tencent.pic.bucket" defaultValue="91anu" description="图片空间名称" />
+
+        <property name="tencent.vod.secret.id" defaultValue="AKID3ftwtg1v1FZ23GrxTnaF5P6Ss1KttQMG" description="视频密钥ID" />
+        <property name="tencent.vod.secret.key" defaultValue="AGDo4gekPZezwcMpxdQSslHkylEkb5TP" description="视频密钥Key" />
+
+        <property name="tencent.cos.app.id" defaultValue="10007337" description="文件项目ID" />
+        <property name="tencent.cos.secret.id" defaultValue="AKIDfIpwMVimu2uOzaw7XhX5h6xAJP1rmup5" description="文件密钥ID" />
+        <property name="tencent.cos.secret.key" defaultValue="VjIMxgpvRJ5GmjpyXZJhSXkiRSxJ8R5S" description="文件密钥Key" />
+        <property name="tencent.cos.bucket" defaultValue="anotheru" description="文件空间名称" />
+        <property name="tencent.cos.bucket.view" defaultValue="static" description="文件空间访问名称" />
+
+        <property name="wechat.app.id" defaultValue="wx096677b13c00c621" description="微信公众号ID" />
+        <property name="wechat.app.secret" defaultValue="40e9db3cfe77c66ef093cef601d10f3f" description="微信公众号密钥" />
+        <property name="wechat.token" defaultValue="123456" description="微信公众号令牌" />
+        <property name="wechat.aes.key" defaultValue="exoL0BBxB3AVwXQRCcXi5Acn6pAaTZ7lShKPRMKwWC9" description="微信公众号消息加解密密钥" />
+        <property name="wechat.partner.id" defaultValue="1285635601" description="微信商户号" />
+        <property name="wechat.partner.key" defaultValue="kjdferyuPPQerf456723ffdjklerwqqw" description="微信商户密钥" />
+        <property name="wechat.pay.url" defaultValue="http://58.210.99.102:8081/pay/wechat/deal.do" description="微信商户付款回跳地址" />
+
+        <property name="worker.id" defaultValue="1" description="工作者编号" />
+
+        <property name="redis.host" defaultValue="192.168.3.116" description="Redis的Host" />
+        <property name="redis.port" defaultValue="6379" description="Redis的端口号" />
+        <property name="redis.password" defaultValue="xiniunet" description="Redis的密码" />
+
+        <property name="pdf.command.location" defaultValue="C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe" description="PDF转换工具命令路径" />
+
+    </group>
+    <script>
+        <generate template="../classes/config.properties"/>
+        <generate template="../classes/jdbc.properties"/>
+    </script>
+</config>
